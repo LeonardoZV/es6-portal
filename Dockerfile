@@ -3,12 +3,16 @@
 #############
 
 # base image
-FROM node:1.17.0-alpine as build
+FROM node:12.4.0-alpine AS build
 
 # install chrome for protractor tests
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -yq google-chrome-stable
+#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+#RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+#RUN apt-get update && apt-get install -yq google-chrome-stable
+
+# install chrome for protractor tests on alpine
+RUN apk add chromium
+ENV CHROME_BIN /usr/bin/chromium-browser
 
 # set working directory
 WORKDIR /app
@@ -25,8 +29,8 @@ RUN npm install -g @angular/cli@7.3.9
 COPY . /app
 
 # run tests
-RUN ng test --watch=false
-RUN ng e2e --port 4202
+RUN ng test --watch=false --codeCoverage=true
+#RUN ng e2e --port 4202
 
 # generate build
 RUN ng build --output-path=dist
@@ -36,7 +40,7 @@ RUN ng build --output-path=dist
 ############
 
 # base image
-FROM nginx:1.16.0-alpine
+FROM nginx:1.17.0-alpine
 
 # copy artifact build from the 'build environment'
 COPY --from=build /app/dist /usr/share/nginx/html
