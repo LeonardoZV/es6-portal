@@ -3,7 +3,7 @@
 #############
 
 # base image
-FROM node:latest as build
+FROM node:1.17.0-alpine as build
 
 # install chrome for protractor tests
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
