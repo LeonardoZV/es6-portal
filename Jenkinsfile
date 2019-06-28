@@ -4,7 +4,7 @@ pipeline {
         registryCredential = 'acr_credentials'
     }
     tools {
-        docker 'default'
+         org.jenkinsci.plugins.docker.commons.tools.DockerTool 'default'
     }
     agent { dockerfile true }
     stages {
