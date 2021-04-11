@@ -1,0 +1,9 @@
+<mat-spinner *ngIf="carregando" class="spinner-centralizado"></mat-spinner>
+
+<div *ngIf="!carregando">
+  <div class="example-button-row">
+    <button mat-raised-button color="primary">Restaurar</button>
+    <button mat-raised-button color="primary">Deletar</button>
+    <button mat-raised-button>Exportar Lista</button>
+  </div>
+</div>

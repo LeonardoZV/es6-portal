@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Novo Período</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Nome" [formControl]="nomePeriodo">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">  
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-button (click)="criar()" cdkFocusInitial>Criar</button>
+</div>

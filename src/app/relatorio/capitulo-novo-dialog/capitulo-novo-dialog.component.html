@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Novo Capítulo</h1>
+<form [formGroup]="novoCapituloForm">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Tipo Capítulo</mat-label>
+      <mat-select formControlName="tipoCapitulo">
+        <mat-option *ngFor="let tipoCapitulo of tiposCapitulos" [value]="tipoCapitulo">
+          {{tipoCapitulo.nomeTipoCapitulo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="nomeCapitulo">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Formato</mat-label>
+      <mat-select formControlName="contentType">
+        <mat-option *ngFor="let contentType of contentTypes" [value]="contentType">
+          {{contentType.nomeContentType}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>    
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-button (click)="criar()" cdkFocusInitial>Criar</button>
+  </div>
+</form>

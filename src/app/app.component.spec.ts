@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'itau-es6-portal'`, () => {
+  it(`should have as title 'publicacao-demonstracoes-financeiras-portal'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('itau-es6-portal');
+    expect(app.title).toEqual('publicacao-demonstracoes-financeiras-portal');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to itau-es6-portal!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to publicacao-demonstracoes-financeiras-portal!');
   });
 });

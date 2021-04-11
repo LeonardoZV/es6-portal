@@ -1,0 +1,51 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+} 
+
+.filtros {
+  background-color: #fafafa; 
+  border-bottom: solid 1px rgba(0,0,0,.12); 
+  padding: 20px 20px 0px 20px
+}
+
+.filtros .mat-form-field {
+    width: 300px;
+}
+
+.filtros .mat-select-value {
+  max-width: 100%;
+  width: 300px;
+}
+
+.example-sidenav {
+  background-color: #fafafa;
+  width: 375px;
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+  
+.background-normal {
+  cursor: pointer;
+  background-color: #fafafa;
+}
+.background-highlight {
+  cursor: pointer;
+  color: royalblue;
+  background-color: white;
+}
+

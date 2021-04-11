@@ -1,0 +1,36 @@
+<mat-spinner *ngIf="carregando" class="spinner-centralizado"></mat-spinner>
+
+<div *ngIf="!carregando">
+  <div class="box">
+    <span class="titulo">{{ ordenacao }} - {{ capitulo.nomeCapitulo }}</span>
+    <div class="lock">
+      <button *ngIf="capitulo?.indicadorTrava === 0" (click)="travar()" mat-icon-button>
+        <mat-icon>lock_open</mat-icon>
+      </button>
+      <button *ngIf="capitulo?.indicadorTrava === 1" (click)="destravar()" mat-icon-button matTooltip="Travado por {{ capitulo?.usuarioTrava.funcional }} - {{ capitulo?.usuarioTrava.nome }} em {{ capitulo?.dataHoraTrava | date: 'dd/MM/yyyy HH:mm:ss' }}" matTooltipPosition="right">
+        <mat-icon>lock</mat-icon>
+      </button>
+    </div>
+  </div>
+  <p>
+    {{ capitulo?.contentType.nomeContentType }}
+    <br>
+    {{ ultimaVersaoArquivoCapitulo?.tamanhoArquivo / 1000 }} KByte
+    <br>
+    Versão {{ ultimaVersaoArquivoCapitulo?.numeroVersaoArquivo }}
+    <br>
+    Tipo Capítulo: {{ capitulo.tipoCapitulo.nomeTipoCapitulo }}
+    <br>
+    ID: {{ capitulo.codigoCapitulo }}
+    <br>
+    Data última modificação: {{ ultimaVersaoArquivoCapitulo?.dataHoraCriacaoArquivo | date: 'dd/MM/yyyy HH:mm:ss' }}
+    <br>
+    Usuário última modificação: {{ ultimaVersaoArquivoCapitulo?.usuarioCriacaoArquivo.nome }}
+    <br>
+    Comentário: {{ ultimaVersaoArquivoCapitulo?.comentarioCriacaoArquivo }}
+  </p>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" [disabled]="capitulo?.indicadorTrava === 1 || capitulo?.tipoCapitulo.codigoTipoCapitulo === 2" (click)="openUploadDialog()">Upload</button>
+    <a mat-raised-button href="{{apiUrl}}/capitulos/{{capitulo.codigoCapitulo}}/versoes/{{ultimaVersaoArquivoCapitulo?.numeroVersaoArquivo}}/arquivo" [disabled]="ultimaVersaoArquivoCapitulo == null">Download</a>
+  </div>
+</div>

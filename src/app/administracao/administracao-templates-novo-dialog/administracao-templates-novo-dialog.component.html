@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Novo Template</h1>
+<form [formGroup]="uploadForm">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="nomeTemplate">
+    </mat-form-field>
+    <br>
+    <input #fileInput hidden="true" type="file" onclick="this.value=null" (change)="fileInputChange($event)" accept=".dotx"/>
+    <button mat-flat-button color="primary" (click)="fileInput.click()">Escolher Arquivo</button> {{ file?.name }}
+  </div>
+  <div mat-dialog-actions align="end">
+    <mat-spinner strokeWidth="3" [diameter]="25" *ngIf="uploading"></mat-spinner>
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-button (click)="criar()" cdkFocusInitial>Criar</button>
+  </div>
+</form>

@@ -1,0 +1,26 @@
+<mat-spinner *ngIf="carregando" class="spinner-centralizado"></mat-spinner>
+
+<div *ngIf="!carregando">
+  <div class="example-container" >
+    <table mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="nomePeriodo">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nomePeriodo}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <br>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="exibirNovoPeriodoDialog()">Novo</button>
+    <button mat-raised-button color="primary">Editar</button>
+    <button mat-raised-button color="primary">Deletar</button>
+    <button mat-raised-button color="primary">Copiar</button>
+    <button mat-raised-button color="primary">Travar</button>
+    <button mat-raised-button color="primary">Destravar</button>
+    <button mat-raised-button>Exportar Lista</button>
+  </div>
+</div>

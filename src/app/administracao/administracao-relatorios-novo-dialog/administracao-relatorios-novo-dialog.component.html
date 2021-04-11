@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Novo Relatório</h1>
+<form [formGroup]="relatorioForm">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Nome" formControlName="nomeRelatorio">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Período</mat-label>
+      <mat-select formControlName="periodo">
+        <mat-option *ngFor="let p of periodos" [value]="p.codigoPeriodo">
+          {{ p.nomePeriodo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tipo Relatório</mat-label>
+      <mat-select formControlName="tipoRelatorio">
+        <mat-option *ngFor="let tr of tiposRelatorios" [value]="tr.codigoTipoRelatorio">
+          {{ tr.nomeTipoRelatorio }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Localidade</mat-label>
+      <mat-select formControlName="localidade">
+        <mat-option *ngFor="let l of localidades" [value]="l.codigoLocalidade">
+          {{ l.nomeLocalidade }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="end">    
+    <button mat-button (click)="cancelar()">Cancelar</button>
+    <button mat-button (click)="criar()"cdkFocusInitial>Criar</button>
+  </div>
+</form>

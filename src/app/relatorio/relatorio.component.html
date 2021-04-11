@@ -1,0 +1,101 @@
+<div class="example-container">
+<div class="filtros">      
+    <mat-form-field>
+      <mat-label>Período</mat-label>
+      <mat-select (selectionChange)="carregarRelatorios($event)">
+        <mat-option *ngFor="let p of periodos" [value]="p.codigoPeriodo">
+          {{ p.nomePeriodo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    &nbsp;&nbsp;
+    <mat-form-field>
+      <mat-label>Relatório</mat-label>
+      <mat-select (selectionChange)="selecionarRelatorio($event)">
+        <mat-option *ngFor="let r of relatorios" [value]="r">
+          {{ r.nomeRelatorio }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+<mat-sidenav-container class="example-sidenav-container">
+  <mat-sidenav #snav mode="side" class="example-sidenav" opened>
+    <div style="position: absolute; background-color: #fafafa; width: 100%; z-index: 1000">
+      <div style="margin: 4px 10px 4px 10px;" class="example-button-row">
+        <button mat-icon-button [disabled]="activeNode == null" (click)="criarCapitulo()">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="activeNode == null">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="activeNode == null" (click)="deletarCapitulo()">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="activeNode == null">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="activeNode == null">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="activeNode == null">
+          <mat-icon>expand_less</mat-icon>
+        </button>
+        <button mat-icon-button [disabled]="activeNode == null">
+          <mat-icon>expand_more</mat-icon>
+        </button>      
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" style="margin-top: 48px">
+      <mat-tree-node *matTreeNodeDef="let node" (click)="selecionarNode(node)" [ngClass]="{ 'background-highlight': activeNode == node, 'background-normal': activeNode != node }" matTreeNodePadding>
+        <button mat-icon-button disabled></button>
+        {{node.name}}    
+      </mat-tree-node>
+      <mat-tree-node *matTreeNodeDef="let node; when: hasChild" (click)="selecionarNode(node)" [ngClass]="{ 'background-highlight': activeNode == node, 'background-normal': activeNode != node }" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        {{node.name}}
+      </mat-tree-node>
+    </mat-tree>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-tab-group *ngIf="tabAtivas" animationDuration="0ms">
+        <mat-tab label="Cockpit">
+          <div style="padding: 20px 20px 20px 20px">
+              <app-relatorio-cockpit></app-relatorio-cockpit>
+          </div>
+        </mat-tab>
+        <mat-tab label="Geral" [disabled]="activeNode == null">
+          <div style="padding: 20px 20px 20px 20px">
+              <app-relatorio-geral *ngIf="activeNode?.tipoObjeto == 1" [node]="activeNode"></app-relatorio-geral>
+              <app-capitulo-geral *ngIf="activeNode?.tipoObjeto == 2" [node]="activeNode"></app-capitulo-geral>
+          </div>
+        </mat-tab>
+        <mat-tab label="Versões" [disabled]="activeNode == null">
+          <div style="padding: 20px 20px 20px 20px">
+              <app-relatorio-versoes *ngIf="activeNode?.tipoObjeto == 1" [node]="activeNode"></app-relatorio-versoes>
+              <app-capitulo-versoes *ngIf="activeNode?.tipoObjeto == 2" [node]="activeNode"></app-capitulo-versoes>
+          </div>
+        </mat-tab>
+        <mat-tab label="Histórico" [disabled]="activeNode == null">
+          <div style="padding: 20px 20px 20px 20px">
+              <app-relatorio-historico></app-relatorio-historico>
+          </div>
+        </mat-tab>
+        <mat-tab label="Configuração" [disabled]="activeNode == null">
+          <div style="padding: 20px 20px 20px 20px">
+              <app-relatorio-configuracao></app-relatorio-configuracao>
+          </div>
+        </mat-tab>
+        <mat-tab label="Permissões" [disabled]="activeNode == null">
+          <div style="padding: 20px 20px 20px 20px">
+              <app-relatorio-permissoes></app-relatorio-permissoes>
+          </div>
+        </mat-tab>
+    </mat-tab-group>    
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</div>

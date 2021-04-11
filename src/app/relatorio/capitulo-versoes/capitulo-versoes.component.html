@@ -1,0 +1,44 @@
+<mat-spinner *ngIf="carregando" class="spinner-centralizado"></mat-spinner>
+
+<div *ngIf="!carregando">
+  <div class="example-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+    
+      <ng-container matColumnDef="numeroVersaoArquivo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Versão </th>
+        <td mat-cell *matCellDef="let element"> {{element.numeroVersaoArquivo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tamanhoArquivo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tamanho </th>
+        <td mat-cell *matCellDef="let element"> {{element.tamanhoArquivo}} Bytes </td>
+      </ng-container>
+
+      <ng-container matColumnDef="usuarioCriacaoArquivo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuário </th>
+        <td mat-cell *matCellDef="let element"> {{element.usuarioCriacaoArquivo.nome}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataHoraCriacaoArquivo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+      <td mat-cell *matCellDef="let element"> {{element.dataHoraCriacaoArquivo | date: 'dd/MM/yyyy HH:mm:ss' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="comentarioCriacaoArquivo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Comentário </th>
+        <td mat-cell *matCellDef="let element"> {{element.comentarioCriacaoArquivo}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <br>
+  <div class="example-button-row">    
+    <!--<button mat-raised-button>Visualizar</button>-->
+    <button mat-raised-button>Download</button>
+    <!--<button mat-raised-button>Comparar</button>-->
+    <button mat-raised-button>Exportar Lista</button>
+    <button mat-raised-button color="primary">Restaurar</button>
+  </div>
+</div>

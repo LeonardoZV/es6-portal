@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Gerar Relatório</h1>
+<form [formGroup]="gerarRelatorioForm">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Template</mat-label>
+      <mat-select formControlName="template" placeholder="Template" required>
+        <mat-option *ngFor="let t of templates" [value]="t">
+          {{ t.nomeTemplate }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="gerarRelatorioForm.controls['template'].hasError('required')">Favor escolher um template</mat-error>
+    </mat-form-field>
+    <div class="checkbox-wrapper">
+        <mat-checkbox [checked]="1">Capa</mat-checkbox>
+        <mat-checkbox class="example-margin" [checked]="1">Sumário</mat-checkbox>
+        <mat-checkbox class="example-margin" [checked]="1">Apoio</mat-checkbox>        
+    </div>
+    <div class="checkbox-wrapper">
+        <mat-checkbox [checked]="1">Versionar</mat-checkbox>
+    </div>
+  </div>
+  <div mat-dialog-actions align="end">    
+    <mat-spinner strokeWidth="3" [diameter]="25" *ngIf="gerando"></mat-spinner>
+    <button mat-button (click)="cancelar()">Cancelar</button> 
+    <button mat-button [disabled]="gerarRelatorioForm.controls['template'].hasError('required')" (click)="gerar()">
+      Gerar
+    </button>
+  </div>
+</form>
